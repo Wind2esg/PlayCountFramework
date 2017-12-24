@@ -8,8 +8,8 @@ namespace Framework
 {
     public abstract class PresentHelper
     {   
-        protected abstract bool Present(ICountResult countResult, NameSwitcher nameSwitcher);
-        public bool GetPresent(ICountResult countResult, NameSwitcher nameSwitcher)
+        protected abstract object Present(ICountResult countResult, NameSwitcher nameSwitcher);
+        public object GetPresent(ICountResult countResult, NameSwitcher nameSwitcher)
         {
             return Present(countResult, nameSwitcher);
         }

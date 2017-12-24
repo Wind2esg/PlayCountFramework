@@ -20,7 +20,7 @@ namespace Present
             }
             return helper;
         }
-        protected override bool Present(ICountResult countResult, NameSwitcher nameSwitcher)
+        protected override object Present(ICountResult countResult, NameSwitcher nameSwitcher)
         {
             string platformZh = nameSwitcher.NameSwitch(countResult.Platform);
             if (countResult.CountList.Count() == 0)

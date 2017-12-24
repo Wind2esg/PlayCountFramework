@@ -34,7 +34,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,10 +49,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DependenceManager\DependenceManager.csproj">
-      <Project>{c44235e6-6945-41c2-8331-6149f4b19cfd}</Project>
-      <Name>DependenceManager</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Framework\Framework.csproj">
       <Project>{cd2b3b5d-8bb2-40bc-9fb2-ecd0a1ac5b17}</Project>
       <Name>Framework</Name>

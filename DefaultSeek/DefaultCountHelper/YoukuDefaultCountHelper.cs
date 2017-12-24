@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Framework;
+using System.Reflection;
 
 namespace DefaultSeek
 {
@@ -32,30 +33,43 @@ namespace DefaultSeek
         protected override IEnumerable<ICountItem> SeekCount(IEnumerable<ISeekItem> seekItemList)
         {
             List<CountItem> countList = new List<CountItem>();
-            string urlPattern = "http://www.soku.com/search_video/q_";
-            string regPattern = @"\Wtype=youku[\S\s]+?([\d.]+)<\b?";
-            string targetUrl = urlPattern + seekItemList.First<ISeekItem>().Series;
-            string responseHtml = GetResponseHtml(targetUrl);
-            CountItem countItem;
-
+            string urlPattern = "http://list.youku.com/show/id_";
+            string regPattern = @"总播放\D+([\d,]+)";
             foreach (var seekItem in seekItemList)
             {
-                countItem = new CountItem();
-                countItem.Title = seekItem.Title;
-
-                if (seekItem.Key != "0")
-                {
-                    countItem.Count = (double.Parse(GetPlayCount(responseHtml, seekItem.Key + regPattern)) * 10000).ToString();
-
-                }
-                else
-                {
-                    countItem.Count = "0";
-                }
-                countList.Add(countItem);
+                countList.Add(GetPlayCount(urlPattern + seekItem.Key + ".html", regPattern, seekItem, (x => x.Replace(",", String.Empty))));
             }
             return countList;
         }
+        //the method is based on the search engine in the platform, however, the results arent stable. As a result we have to change it.
+        //protected override IEnumerable<ICountItem> SeekCount(IEnumerable<ISeekItem> seekItemList)
+        //{
+        //    List<CountItem> countList = new List<CountItem>();
+        //    string urlPattern = "http://www.soku.com/search_video/q_";
+        //    string regPattern = @"\Wtype=youku[\S\s]+?([\d.]+)<\b?";
+        //    string targetUrl = urlPattern + seekItemList.First<ISeekItem>().Series;
+        //    string responseHtml = GetResponseHtml(targetUrl);
+        //    CountItem countItem;
+
+        //    foreach (var seekItem in seekItemList)
+        //    {
+        //        countItem = new CountItem();
+        //        countItem.Title = seekItem.Title;
+        //        countItem.Key = seekItem.Key;
+
+        //        double countDouble = 0;
+        //        if (double.TryParse(GetPlayCount(responseHtml, seekItem.Key + regPattern), out countDouble))
+        //        {
+        //            countItem.Count = (countDouble * 10000).ToString();
+        //        }
+        //        else
+        //        {
+        //            countItem.Count = "优酷搜索引擎关键字 " + seekItem.Series + " 的搜索结果已发生变化，无法获得数据，需到优酷搜索";
+        //        }
+        //        countList.Add(countItem);
+        //    }
+        //    return countList;
+        //}
         protected override IEnumerable<ISeekItem> SeekSeriesSeeds(string series)
         {
             return DefaultDb.GetDefaultRepo("youku", series);

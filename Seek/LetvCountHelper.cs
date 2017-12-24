@@ -28,25 +28,11 @@ namespace Seek
         {
             List<CountItem> countList = new List<CountItem>();
             string urlPattern = "http://v.stat.letv.com/vplay/queryMmsTotalPCount?pid=";
-            string regPattern = @"plist_play_count"":(\d+)";
-            string targetUrl = null;
-            CountItem countItem;
+            string regPattern = @"plist_play_count\D*(\d+)";
 
             foreach (var seekItem in seekItemList)
             {
-                countItem = new CountItem();
-                countItem.Title = seekItem.Title;
-                countItem.Key = seekItem.Key;
-                if (seekItem.Key != "0")
-                {
-                    targetUrl = urlPattern + seekItem.Key;
-                    countItem.Count = GetPlayCount(GetResponseHtml(targetUrl), regPattern);
-                }
-                else
-                {
-                    countItem.Count = "0";
-                }
-                countList.Add(countItem);
+                countList.Add(GetPlayCount(urlPattern + seekItem.Key, regPattern, seekItem, (x => x)));
             }
             return countList;
         }
@@ -56,11 +42,11 @@ namespace Seek
             string searchUrl = searchUrlPattern + series;
             string responseHtml = GetResponseHtml(searchUrl);
 
-            string regPattern = @"href=""http://www.le.com/[^/]+/(?<key>\d+).html";
-            string regSeries = @"[^" + series + @"]+" + series + @"(?<title>[^""]*)""";
-            string reg = regPattern + regSeries;
+            string regPattern = @"http://www.le.com/[^/]+/(?<key>\d+).html";
+            string regSeries = series + @"(?<title>[^""]*)""[^>]*";
+            string reg = regSeries + regPattern;
 
-            return GetSeeds(responseHtml, reg, series);
+            return GetSeeds(responseHtml, reg, series, System.Text.RegularExpressions.RegexOptions.RightToLeft);
         }
     }
 }

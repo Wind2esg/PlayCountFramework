@@ -34,31 +34,10 @@ namespace Seek
             
             List<CountItem> countList = new List<CountItem>();
             string urlPattern = "https://v.qq.com/x/cover/";
-            string regPattern = @"interactionCount\W+content\D\D(\d+\b)";
-            string targetUrl = null;
-            CountItem countItem;
-            string responseHtml = null;
-            foreach(var seekItem in seekItemList)
+            string regPattern = @"interactionCount\W+content\D+(\d+\b)";
+            foreach (var seekItem in seekItemList)
             {
-                countItem = new CountItem();
-                countItem.Title = seekItem.Title;
-                countItem.Key = seekItem.Key;
-                if (seekItem.Key != "0")
-                {
-                    targetUrl = urlPattern + seekItem.Key + ".html";
-                    responseHtml = GetResponseHtml(targetUrl);
-                    countItem.Count = GetPlayCount(responseHtml, regPattern);
-                    if(countItem.Count == "")
-                    {
-                        countItem.Count = "0";
-                    }
-                    System.Threading.Thread.Sleep(1000);
-                }
-                else
-                {
-                    countItem.Count = "0";
-                }
-                countList.Add(countItem);
+                countList.Add(GetPlayCount(urlPattern + seekItem.Key + ".html", regPattern, seekItem, (x => x)));
             }
             return countList;
         }
@@ -70,7 +49,7 @@ namespace Seek
             string responseHtml = GetResponseHtml(searchUrl);
 
             string regPattern = @"href=""http://v.qq.com/detail/./(?<key>[\w\d]+).html""";
-            string regSeries = @"[^" + series + @"]+title=""" + series + @"(?<title>[\S\s]*?)""";
+            string regSeries = @"[^" + series + @"]+?title=""" + series + @"(?<title>[\S\s]*?)""";
             string reg = regPattern + regSeries;
 
             return GetSeeds(responseHtml, reg, series);

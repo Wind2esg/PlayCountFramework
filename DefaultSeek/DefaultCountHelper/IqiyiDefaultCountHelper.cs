@@ -24,19 +24,14 @@ namespace DefaultSeek
         }
         protected override IEnumerable<ICountItem> SeekCount(IEnumerable<ISeekItem> seekItemList)
         {
-            
-            Assembly assembly = null;
-            foreach(var asm in AppDomain.CurrentDomain.GetAssemblies())
+            List<CountItem> countList = new List<CountItem>();
+            string urlPattern = "http://mixer.video.iqiyi.com/jp/mixin/videos/";
+            string regPattern = @"playCount\D*(\d+\b)?";
+            foreach (var seekItem in seekItemList)
             {
-                
-                if(asm.GetName().Name == "Seek")
-                {
-                    assembly = asm;
-                }
+                countList.Add(GetPlayCount(urlPattern + seekItem.Key, regPattern, seekItem, (x => x)));
             }
-            Type helperType = assembly.GetType("Seek.IqiyiCountHelper");
-            object helperInstance = helperType.GetMethod("GetInstance").Invoke(null, null);
-            return (IEnumerable < ICountItem > )helperType.GetMethod("GetCount").Invoke(helperInstance, new object[1] { seekItemList });
+            return countList;
         }
         protected override IEnumerable<ISeekItem> SeekSeriesSeeds(string series)
         {

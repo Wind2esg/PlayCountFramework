@@ -8,15 +8,15 @@ using System.Reflection;
 
 namespace DefaultSeek
 {
-    class TextDefaultPresentHelper: PresentHelper
+    class HtmlDefaultPresentHelper : PresentHelper
     {
-        private static TextDefaultPresentHelper helper = null;
-        private TextDefaultPresentHelper() { }
-        public static TextDefaultPresentHelper GetInstance()
+        private static HtmlDefaultPresentHelper helper = null;
+        private HtmlDefaultPresentHelper() { }
+        public static HtmlDefaultPresentHelper GetInstance()
         {
             if (helper == null)
             {
-                helper = new TextDefaultPresentHelper();
+                helper = new HtmlDefaultPresentHelper();
             }
             return helper;
         }
@@ -35,9 +35,9 @@ namespace DefaultSeek
                     assembly = asm;
                 }
             }
-            Type helperType = assembly.GetType("Present.TextPresentHelper");
+            Type helperType = assembly.GetType("Present.HtmlPresentHelper");
             object helperInstance = helperType.GetMethod("GetInstance").Invoke(null, null);
-            return (bool)helperType.GetMethod("GetPresent").Invoke(helperInstance, new object[2] { defaultCountResult, nameSwitcher });
+            return helperType.GetMethod("GetPresent").Invoke(helperInstance, new object[2] { defaultCountResult, nameSwitcher });
         }
     }
 }

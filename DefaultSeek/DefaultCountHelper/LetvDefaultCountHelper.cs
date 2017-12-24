@@ -25,17 +25,15 @@ namespace DefaultSeek
         }
         protected override IEnumerable<ICountItem> SeekCount(IEnumerable<ISeekItem> seekItemList)
         {
-            Assembly assembly = null;
-            foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
+            List<CountItem> countList = new List<CountItem>();
+            string urlPattern = "http://v.stat.letv.com/vplay/queryMmsTotalPCount?pid=";
+            string regPattern = @"plist_play_count\D*(\d+)";
+
+            foreach (var seekItem in seekItemList)
             {
-                if (asm.GetName().Name == "Seek")
-                {
-                    assembly = asm;
-                }
+                countList.Add(GetPlayCount(urlPattern + seekItem.Key, regPattern, seekItem, (x => x)));
             }
-            Type helperType = assembly.GetType("Seek.LetvCountHelper");
-            object helperInstance = helperType.GetMethod("GetInstance").Invoke(null, null);
-            return (IEnumerable<ICountItem>)helperType.GetMethod("GetCount").Invoke(helperInstance, new object[1] { seekItemList });
+            return countList;
         }
         protected override IEnumerable<ISeekItem> SeekSeriesSeeds(string series)
         {

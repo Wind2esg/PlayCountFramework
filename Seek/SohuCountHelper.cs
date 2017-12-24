@@ -26,29 +26,17 @@ namespace Seek
         //sohu helper
         //url example https://count.vrs.sohu.com/count/query_Album.action?albumId=@seekItem.Key
         //tips: good sohu. it provides count api. return data is like " var count = "
+        //i update the method instead of getting data from the api above.
+        //grasp the url of the series then get the data from there
+        //this can avoid the problem of two forms for the series, one is like Octonauts, another is Peppa Pig
         protected override IEnumerable<ICountItem> SeekCount(IEnumerable<ISeekItem> seekItemList)
         {
             List<CountItem> countList = new List<CountItem>();
-            string urlPattern = "https://count.vrs.sohu.com/count/query_Album.action?albumId=";
-            string regPattern = @"(\d+)";
-            string targetUrl = null;
-            CountItem countItem;
-
+            string urlPattern = "http://tv.sohu.com/";
+            string regPattern = @"播放数\D*(\d+)";
             foreach (var seekItem in seekItemList)
             {
-                countItem = new CountItem();
-                countItem.Title = seekItem.Title;
-                countItem.Key = seekItem.Key;
-                if (seekItem.Key != "0")
-                {
-                    targetUrl = urlPattern + seekItem.Key;
-                    countItem.Count = GetPlayCount(GetResponseHtml(targetUrl), regPattern);
-                }
-                else
-                {
-                    countItem.Count = "0";
-                }
-                countList.Add(countItem);
+                countList.Add(GetPlayCount(urlPattern + seekItem.Key, regPattern, seekItem, (x => x)));
             }
             return countList;
         }
@@ -58,28 +46,11 @@ namespace Seek
             string searchUrl = searchUrlPattern + series;
             string responseHtml = GetResponseHtml(searchUrl);
 
-            string regPattern = @"[^>]+?_s_a\D+(?<key>\d+)""";
-            string regSeries = @"href=""//tv.sohu.com/s[^" + series + @"]+title=""" + series + @"(?<title>[^""]*)""";
-            string reg = regSeries + regPattern;
+            string regPattern = @"href=""//tv.sohu.com/(?<key>[^""]+)[^>]+";
+            string regSeries = series + @"(?<title>[^""]*)""";
+            string reg = regPattern + regSeries;
 
-            IEnumerable<ISeekItem> seekItemList =  GetSeeds(responseHtml, reg, series);
-            if(seekItemList.Count() != 0)
-            {
-                return seekItemList;
-            }
-            
-            //for sohu integrated series, for example: peppa pig
-            string alumHref = @"href=""//tv.sohu.com/(?<key>s[^""]+)""[^t]*title=""" + series + @"(?<title>[^""]*)""";
-            seekItemList = GetSeeds(responseHtml, alumHref, series);
-            foreach(ISeekItem seekItem in seekItemList)
-            {
-                searchUrlPattern = "http://tv.sohu.com/";
-                searchUrl = searchUrlPattern + seekItem.Key;
-                responseHtml = GetResponseHtml(searchUrl);
-                reg = @"PLAYLIST_ID=""([^""]+)""";
-                seekItem.Key = GetPlayCount(responseHtml, reg);
-            }
-            return seekItemList;
+            return GetSeeds(responseHtml, reg, series);
         }
     }
 }

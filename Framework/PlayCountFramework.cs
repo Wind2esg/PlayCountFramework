@@ -41,7 +41,9 @@ namespace Framework
             string[] helperDir = new string[helperDirTokens.Count()];
             for(int i = 0;  i < helperDirTokens.Count(); i++ )
             {
-                helperDir[i] = @"d:\Users\Adol\Documents\visual studio 2017\Projects\CShapReview\Framework\bin\Debug\" + helperDirTokens[i] + @"\";
+                //currently put all dlls in the current dir
+                helperDir[i] = System.Environment.CurrentDirectory + @"\";
+                //@"d:\Users\Adol\Documents\visual studio 2017\Projects\PlayCountFramework\HtmlRecorder\bin\Debug\"+ helperDirTokens[i] + @"\";
             }
             return helperDir;
         }

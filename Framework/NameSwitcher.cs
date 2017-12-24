@@ -28,7 +28,7 @@ namespace Framework
             nameDict.Add("腾讯", "tencent");
             nameDict.Add("优酷", "youku");
             nameDict.Add("搜狐", "sohu");
-            nameDict.Add("Pptv", "pPTV");
+            nameDict.Add("Pptv", "pptv");
             nameDict.Add("乐视", "letv");
             NameDict = nameDict;
         }

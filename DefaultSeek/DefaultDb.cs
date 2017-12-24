@@ -100,20 +100,20 @@ namespace DefaultSeek
         }
         public static void SohuOctonautsSetup(string platform = "sohu", string series = "海底小纵队")
         {
-            Add(platform, new SeekItem(series, "全集", "6937983"));
-            Add(platform, new SeekItem(series, "第四季", "9283789"));
-            Add(platform, new SeekItem(series, "特别版", "7111152"));
-            Add(platform, new SeekItem(series, "儿歌", "7046032"));
+            Add(platform, new SeekItem(series, "全集", "s2014/hdxzd/"));
+            Add(platform, new SeekItem(series, "第四季", "s2017/dhphdxzd4/"));
+            Add(platform, new SeekItem(series, "特别版", "s2014/hdxzdzhyeg/"));
+            Add(platform, new SeekItem(series, "儿歌", "s2014/hdxzdtbpian/"));
         }
         public static void PptvOctonautsSetup(string platform = "pptv", string series = "海底小纵队")
         {
-            Add(platform, new SeekItem(series, "全集", ""));
-            Add(platform, new SeekItem(series, "第一季", "第一季"));
-            Add(platform, new SeekItem(series, "第二季", "第二季"));
-            Add(platform, new SeekItem(series, "第三季", "第三季"));
-            Add(platform, new SeekItem(series, "第四季", "第四季"));
-            Add(platform, new SeekItem(series, "特别版", "特别篇"));
-            Add(platform, new SeekItem(series, "儿歌", "儿歌"));
+            Add(platform, new SeekItem(series, "全集", "uZp29FzCMnDTUbk"));
+            Add(platform, new SeekItem(series, "第一季", "dcCsKpL4aKYJhib8"));
+            Add(platform, new SeekItem(series, "第二季", "ECYSkPhezgxv7VU"));
+            Add(platform, new SeekItem(series, "第三季", "EScRjicddzQtu7FQ"));
+            Add(platform, new SeekItem(series, "第四季", "naONC3PZSYfqaNA"));
+            Add(platform, new SeekItem(series, "特别版", "EykDgelPvic1g3kY"));
+            Add(platform, new SeekItem(series, "儿歌", "up139V3DM3HUUro"));
         }
         public static void LetvOctonautsSetup(string platform = "letv", string series = "海底小纵队")
         {
@@ -153,19 +153,19 @@ namespace DefaultSeek
         }
         public static void SohuPeppaPigSetup(string platform = "sohu", string series = "小猪佩奇")
         {
-            Add(platform, new SeekItem(series, "全集", "9061583"));
-            Add(platform, new SeekItem(series, "第一季", "9107362"));
-            Add(platform, new SeekItem(series, "第二季", "9107364"));
-            Add(platform, new SeekItem(series, "第三季", "9107363"));
-            Add(platform, new SeekItem(series, "第四季", "9107365"));
+            Add(platform, new SeekItem(series, "全集", "s2015/fhzxm/"));
+            Add(platform, new SeekItem(series, "第一季", "s2016/dhpfhzxm1/"));
+            Add(platform, new SeekItem(series, "第二季", "s2016/dhpfhzxm2/"));
+            Add(platform, new SeekItem(series, "第三季", "s2016/fhzxm3/"));
+            Add(platform, new SeekItem(series, "第四季", "s2016/fhzxm4/"));
         }
         public static void PptvPeppaPigSetup(string platform = "pptv", string series = "小猪佩奇")
         {
-            Add(platform, new SeekItem("粉红猪小妹", "全集", ""));
-            Add(platform, new SeekItem(series, "第一季", "第一季"));
-            Add(platform, new SeekItem(series, "第二季", "第二季"));
-            Add(platform, new SeekItem(series, "第三季", "第三季"));
-            Add(platform, new SeekItem(series, "第四季", "第四季"));
+            Add(platform, new SeekItem(series, "全集", "fOfRT7cdjcsurBQ"));
+            Add(platform, new SeekItem(series, "第一季", "Cz0Xlf1j0xF08lo"));
+            Add(platform, new SeekItem(series, "第二季", "DDYiaoAhu3hxicicWU"));
+            Add(platform, new SeekItem(series, "第三季", "DTchnwdt3RtibicGQ"));
+            Add(platform, new SeekItem(series, "第四季", "DjgUkvpg0A5x71c"));
         }
         public static void LetvPeppaPigSetup(string platform = "letv", string series = "小猪佩奇")
         {
@@ -195,6 +195,10 @@ namespace DefaultSeek
         {
             Add(platform, new SeekItem(series, "第一季", "z21943d702a9f11e59e2a"));
             Add(platform, new SeekItem(series, "第二季", "z229b815c182311e6a080"));
+        }
+        public static void PptvPawPatrolSetup(string platform = "pptv", string series = "汪汪队立大功")
+        {
+            Add(platform, new SeekItem(series, "全集", "3G1HxS2TA0GkIoo"));
         }
         public static void LetvPawPatrolSetup(string platform = "letv", string series = "汪汪队立大功")
         {
@@ -232,21 +236,25 @@ namespace DefaultSeek
         }
         public static void SohuMyLittlePonySetup(string platform = "sohu", string series = "小马宝莉")
         {
-            Add(platform, new SeekItem(series, "全集（一到七）", "6979659"));
-            Add(platform, new SeekItem(series, "全集英文版", "9047090"));
-            Add(platform, new SeekItem(series, "第一季", "6971310"));
-            Add(platform, new SeekItem(series, "第二季", "6969662"));
-            Add(platform, new SeekItem(series, "第三季", "6969658"));
-            Add(platform, new SeekItem(series, "第四季", "6969663"));
-            Add(platform, new SeekItem(series, "第五季", "9035562"));
-            Add(platform, new SeekItem(series, "第六季", "9347776"));
-            Add(platform, new SeekItem(series, "第七季", "9379734"));
+            Add(platform, new SeekItem(series, "全集（一到七）", "s2014/xmbl/"));
+            Add(platform, new SeekItem(series, "全集英文版", "s2015/xbmlywb/"));
+            Add(platform, new SeekItem(series, "第一季", "s2014/wdxmjyydmf1/"));
+            Add(platform, new SeekItem(series, "第二季", "s2014/wdxmjyydmf2/"));
+            Add(platform, new SeekItem(series, "第三季", "s2014/wdxmjyydmf3/"));
+            Add(platform, new SeekItem(series, "第四季", "s2014/wdxmjyydmf4/"));
+            Add(platform, new SeekItem(series, "第五季", "s2015/dhpxmbl5/"));
+            Add(platform, new SeekItem(series, "第六季", "s2017/xmbaoli6/"));
+            Add(platform, new SeekItem(series, "第七季", "s2017/xmbaoli7/"));
         }
         public static void PptvMyLittlePonySetup(string platform = "pptv", string series = "小马宝莉")
         {
-            Add(platform, new SeekItem(series, "第二季", " 友谊的魔力第2季"));
-            Add(platform, new SeekItem(series, "第四季", " 友谊的魔力第4季"));
-            Add(platform, new SeekItem(series, "第五季", " 友谊的魔力第5季"));
+            Add(platform, new SeekItem(series, "第一季", "9ldBvyeNicTueHIQ"));
+            Add(platform, new SeekItem(series, "第二季", "91ZCwCiaOicjyfHYU"));
+            Add(platform, new SeekItem(series, "第三季", "ibVRAviaaMicDqdG4M"));
+            Add(platform, new SeekItem(series, "第四季", "icVA8uiaKIibDaZF38"));
+            Add(platform, new SeekItem(series, "第五季", "jaCMCnLYSIbpZ88"));
+            Add(platform, new SeekItem(series, "第六季", "NgDsatI4qOZJxy8"));
+
         }
         public static void LetvMyLittlePonySetup(string platform = "letv", string series = "小马宝莉")
         {

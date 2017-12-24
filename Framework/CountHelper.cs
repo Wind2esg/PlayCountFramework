@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Net;
+using System.IO.Compression;
 
 namespace Framework
 {
@@ -18,6 +19,8 @@ namespace Framework
             try
             {
                 request = HttpWebRequest.CreateHttp(targetUrl);
+                request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36";
+                request.Headers.Add("Accept-Encoding: gzip");
             }
             catch (Exception ex)
             {
@@ -31,12 +34,17 @@ namespace Framework
                 {
                     using (var response = request.GetResponse() as HttpWebResponse)
                     {
+
                         using (var stream = response.GetResponseStream())
                         {
-                            using (var streamReader = new StreamReader(stream))
+                            using (var streamReader = new StreamReader(new GZipStream(stream, CompressionMode.Decompress)))
                             {
                                 string responseHtml = streamReader.ReadToEnd();
+                                streamReader.Close();
+                                stream.Close();
+                                response.Close();
                                 return responseHtml;
+
                             }
                         }
                     }
@@ -51,18 +59,32 @@ namespace Framework
             return null;
 
         }
-        protected string GetPlayCount(string responseHtml, string regPattern)
+        protected CountItem GetPlayCount(string targetUrl, string reg, ISeekItem seekItem, Func<string, string> countFormatter, RegexOptions regexOptions = RegexOptions.None)
         {
-            var match = Regex.Match(responseHtml, regPattern);
-            return match.Groups[1].ToString();
+            CountItem countItem = new CountItem();
+            countItem.Title = seekItem.Title;
+            string responseHtml = GetResponseHtml(targetUrl);
+            if(responseHtml != null)
+            {
+                Match match = Regex.Match(responseHtml, reg, regexOptions);
+                if (match.Groups.Count != 1)
+                {
+                    countItem.Count = countFormatter(match.Groups[1].ToString());
+                    countItem.Key = seekItem.Key;
+                    return countItem;
+                }
+            }
+            countItem.Count = "没结果，点key查";
+            countItem.Key = targetUrl;
+            return countItem;
         }
-        protected IEnumerable<ISeekItem> GetSeeds(string responseHtml, string regPattern, string series)
+        protected IEnumerable<ISeekItem> GetSeeds(string responseHtml, string regPattern, string series, RegexOptions regexOptions = RegexOptions.None)
         {
             List<ISeekItem> searchSeeds = new List<ISeekItem>();
-            MatchCollection matches = Regex.Matches(responseHtml, regPattern);
+            MatchCollection matches = Regex.Matches(responseHtml, regPattern, regexOptions);
             if(matches.Count == 0)
             {
-                Console.WriteLine("no seeds match");
+                //there is no series on the platform
                 return searchSeeds;
             }
             ISeekItem seekItem = null;

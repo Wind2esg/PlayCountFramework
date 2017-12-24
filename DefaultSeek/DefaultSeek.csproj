@@ -45,6 +45,7 @@
     <Compile Include="DefaultCountHelper\PptvDefaultCountHelper.cs" />
     <Compile Include="DefaultCountHelper\SohuDefaultCountHelper.cs" />
     <Compile Include="DefaultCountHelper\TencentDefaultCountHelper.cs" />
+    <Compile Include="DefaultPresentHelper\HtmlDefaultPresentHelper.cs" />
     <Compile Include="DefaultPresentHelper\TextDefaultPresentHelper.cs" />
     <Compile Include="DefaultCountHelper\YoukuDefaultCountHelper.cs" />
     <Compile Include="DefaultDb.cs" />
@@ -58,10 +59,6 @@
     <ProjectReference Include="..\Present\Present.csproj">
       <Project>{c1739908-6df2-4b32-a97b-e25e5ffc6395}</Project>
       <Name>Present</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Seek\Seek.csproj">
-      <Project>{059f7674-12e3-4447-b687-f63a8a8aa7de}</Project>
-      <Name>Seek</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

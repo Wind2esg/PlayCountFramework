@@ -5,13 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using Framework;
-using DependenceManager;
-
-using System.Web.Script.Serialization;
 using System.IO;
-
-using Microsoft.CSharp;
-using System.CodeDom.Compiler;
 
 namespace TextRecorder
 {
@@ -43,6 +37,7 @@ namespace TextRecorder
                 getSeriesSeeds,
                 new object[1] { series },
                 getCount);
+
             countResult.CountList = (IEnumerable<ICountItem>)countList;
             var result = PlayCountFramework.GetPresent(
                 presentHelperTypeString, 
@@ -69,7 +64,12 @@ namespace TextRecorder
                         presentHelperDependences);
                     if((bool)result == true)
                     {
-                        Console.WriteLine("{0} {1} 播放量数据搜索成功，数记录在文件中!", nameSwitcher.NameSwitch(platform), series);
+                        Console.WriteLine("{0} {1} 播放量数据搜索成功，已记录在文件中!", nameSwitcher.NameSwitch(platform), series);
+                        Console.WriteLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("{0} {1} 播放量数据搜索失败!", nameSwitcher.NameSwitch(platform), series);
                         Console.WriteLine();
                     }
                 }
@@ -80,24 +80,46 @@ namespace TextRecorder
         }
         public static void Main(string[] args)
         {
-            string[] platforms = { "iqiyi", "tencent", "youku", "sohu", "pptv", "letv" };
+            string[] platforms = { "iqiyi", "youku" , "sohu", "pptv", "letv" };
             string[] seriesList = { "海底小纵队", "小猪佩奇", "汪汪队立大功", "小马宝莉", "嗨道奇", "全球探险冲冲冲" };
 
-            string[] platforms2 = { "iqiyi" };
-            string[] seriesList2 = { "海底小纵队" };
+            string[] platforms2 = { "tencent" };
+            string[] seriesList2 = { "海底小纵队", "小猪佩奇", "汪汪队立大功", "小马宝莉", "嗨道奇", "全球探险冲冲冲" };
 
-            Show(platforms, seriesList, new string[2] { "Seek", "DefaultSeek" }, new string[2] { "Present", "DefaultSeek" });
+            while (true)
+            {
+                Console.WriteLine("请输入操作，选择要抓取的平台 1 爱奇艺，优酷，搜狐，PPTV，乐视 2 腾讯 9 退出");
+                ConsoleKeyInfo input = Console.ReadKey();
+                Console.WriteLine();
+                switch (input.KeyChar.ToString())
+                {
+                    case "1":
+                        Console.WriteLine("选择抓取爱奇艺，优酷，搜狐，PPTV，乐视的数据");
+                        Show(platforms, seriesList, new string[2] { "Seek", "DefaultSeek" }, new string[2] { "Present", "DefaultSeek" });
+                        break;
+                    case "2":
+                        Console.WriteLine("选择抓取腾讯的数据");
+
+                        Show(platforms2, seriesList2, new string[2] { "Seek", "DefaultSeek" }, new string[2] { "Present", "DefaultSeek" });
+                        break;
+                    case "9":
+                        return;
+                    default:
+                        Console.WriteLine("请输入正确的操作");
+                        break;
+                }
+
+            }
+            //
 
             //DependenceManger.Init();
             //DependenceManger.DownloadDependenceFileAndCompile(
-            //    @"d:\Users\Adol\Documents\visual studio 2017\Projects\CShapReview\TextRecorder\bin\Debug\",
-            //    @"d:\Users\Adol\Documents\visual studio 2017\Projects\CShapReview\TextRecorder\bin\Debug\vendor\",
-            //    @"d:\Users\Adol\Documents\visual studio 2017\Projects\CShapReview\TextRecorder\bin\Debug\vendor\",
+            //    @"d:\Users\Adol\Documents\visual studio 2017\Projects\PlayCountFramework\TextRecorder\bin\Debug\",
+            //    @"d:\Users\Adol\Documents\visual studio 2017\Projects\PlayCountFramework\TextRecorder\bin\Debug\vendor\",
+            //    @"d:\Users\Adol\Documents\visual studio 2017\Projects\PlayCountFramework\TextRecorder\bin\Debug\vendor\",
             //    false);
 
             //DependenceManger.PrintLog();
-
-            Console.ReadLine();
         }
     }
 }

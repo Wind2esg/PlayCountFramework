@@ -11,6 +11,6 @@ namespace Framework
         string Title { get; }
         string Count { get;}
         //for test
-        string Key { get; }
+        string Key { get;}
     }
 }

@@ -29,24 +29,10 @@ namespace Seek
         {
             List<CountItem> countList = new List<CountItem>();
             string urlPattern = "http://mixer.video.iqiyi.com/jp/mixin/videos/";
-            string regPattern = @"playCount\D\D(\d+\b)?";
-            string targetUrl = null;
-            CountItem countItem;
+            string regPattern = @"playCount\D*(\d+\b)?";
             foreach (var seekItem in seekItemList)
             {
-                countItem = new CountItem();
-                countItem.Title = seekItem.Title;
-                countItem.Key = seekItem.Key;
-                if (seekItem.Key != "0")
-                {
-                    targetUrl = urlPattern + seekItem.Key;
-                    countItem.Count = GetPlayCount(GetResponseHtml(targetUrl), regPattern);
-                }
-                else
-                {
-                    countItem.Count = "0";
-                }
-                countList.Add(countItem);
+                countList.Add(GetPlayCount(urlPattern + seekItem.Key, regPattern, seekItem, (x => x)));
             }
             return countList;
         }
@@ -58,11 +44,11 @@ namespace Seek
             string searchUrl = searchUrlPattern + series;
             string responseHtml = GetResponseHtml(searchUrl);
 
-            string regPattern = @"\s+?data-widget-searchlist-tvid=""(?<key>\d+)""[\S\s]+?";
-            string regSeries = @"""" + series + @"(?<title>[\S\s]*?)""";
-            string reg = regPattern + regSeries;
+            string regPattern = @"\s+?data-widget-searchlist-tvid=""(?<key>\d+)";
+            string regSeries = series + @"(?<title>[^""]*?)""[^<]*";
+            string reg = regSeries + regPattern;
 
-            return GetSeeds(responseHtml, reg, series);
+            return GetSeeds(responseHtml, reg, series, System.Text.RegularExpressions.RegexOptions.RightToLeft);
         }
     }
 }

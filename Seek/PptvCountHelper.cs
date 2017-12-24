@@ -25,21 +25,17 @@ namespace Seek
         //pptv helper
         //like Youku, we can get the playCount data from the search result page
         //tips: the data's format is like "123,23". remove ","
+        //we update the method already. we dont get the data from the search result page because the result isnt stable
         protected override IEnumerable<ICountItem> SeekCount(IEnumerable<ISeekItem> seekItemList)
         {
-            List<ICountItem> countList = new List<ICountItem>();
-            CountItem countItem = null;
-
+            List<CountItem> countList = new List<CountItem>();
+            string urlPattern = "http://v.pptv.com/page/";
+            string regPattern = @"播放\D+([\d\.]+)";
             foreach (var seekItem in seekItemList)
             {
-                countItem = new CountItem();
-                countItem.Title = seekItem.Title;
-                countItem.Count = (double.Parse(seekItem.Key.Replace(",", ""))).ToString();
-                countItem.Key = seekItem.Key;
-                countList.Add(countItem);
+                countList.Add(GetPlayCount(urlPattern + seekItem.Key + ".html", regPattern, seekItem, (x => (double.Parse(x) * 10000).ToString())));
             }
             return countList;
-
         }
 
         protected override IEnumerable<ISeekItem> SeekSeriesSeeds(string series)
@@ -48,8 +44,8 @@ namespace Seek
             string searchUrl = searchUrlPattern + series;
             string responseHtml = GetResponseHtml(searchUrl);
 
-            string regPattern = @"[^播放]+?播放\D+(?<key>[\d,]+)";
-            string regSeries = @"title=""" + series + @"(?<title>[^""]*)"">";
+            string regPattern = @"href=""http://v.pptv.com/show/(?<key>[^\.]).html""[^>]+";
+            string regSeries = series + @"(?<title>[^""]*)""";
             string reg = regSeries + regPattern;
 
             return GetSeeds(responseHtml, reg, series);
