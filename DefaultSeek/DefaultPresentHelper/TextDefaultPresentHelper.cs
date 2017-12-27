@@ -20,10 +20,11 @@ namespace DefaultSeek
             }
             return helper;
         }
-        protected override object Present(ICountResult countResult, NameSwitcher nameSwitcher)
+        protected override object Present(object countObj, NameSwitcher nameSwitcher)
         {
+            var countResult = countObj as ICountResult;
             CountResult defaultCountResult = new CountResult();
-            defaultCountResult.Platform = countResult.Platform.Replace("Default", "");
+            defaultCountResult.Platform = countResult.Platform;
             defaultCountResult.Series = countResult.Series;
             defaultCountResult.CountList = countResult.CountList;
 

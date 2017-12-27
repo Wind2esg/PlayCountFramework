@@ -26,9 +26,8 @@ namespace Framework
             Type helperType = assembly.GetType(helperTypeString);
             for (int i = 0; i < helperDir.Count() - 1 ; i++)
             {
-                var asm = Assembly.LoadFile(helperDir[i] + helperDirTokens[i] + ".dll");
+                Assembly.LoadFile(helperDir[i] + helperDirTokens[i] + ".dll");
             }
-            var asms = AppDomain.CurrentDomain.GetAssemblies();
             return helperType;
         }
         public static object GetHelperInstance(Type helperType, string getInstance, object[] parameters)
@@ -47,7 +46,7 @@ namespace Framework
             }
             return helperDir;
         }
-        public static object GetResult(string countHelperTypeString, string[] countHelperDirTokens, string getInstance, object[] getInstanceParameters, string getSeriesSeeds, object[] getSeriesSeedsParameters, string getCount, object[] getCountParametersNoSeeds = null)
+        public static object GetResult(string countHelperTypeString, string[] countHelperDirTokens, object[] getSeriesSeedsParameters, string getInstance = "GetInstance", object[] getInstanceParameters = null, string getSeriesSeeds = "GetSeriesSeeds", string getCount = "GetCount", object[] getCountParametersNoSeeds = null)
         {
             var helperType = GetHelperType(countHelperTypeString, countHelperDirTokens);
             var helperInstance = GetHelperInstance(helperType, getInstance, getInstanceParameters);
@@ -55,8 +54,7 @@ namespace Framework
             object[] getCountParameters;
             if (getCountParametersNoSeeds == null)
             {
-                getCountParameters = new object[1];
-                getCountParameters[0] = seriesSeeds;
+                getCountParameters = new object[1] { seriesSeeds };
             }
             else
             {
@@ -70,7 +68,7 @@ namespace Framework
             return GetPlayCount(helperType, helperInstance, getCount, getCountParameters);
         }
         //choose present style
-        public static object GetPresent(string presentHelperTypeString, string[] presentHelperDirTokens, string getInstance, object[] getInstanceParameters, string getPresent, object[] getPresentParameters)
+        public static object GetPresent(string presentHelperTypeString, string[] presentHelperDirTokens, object[] getPresentParameters, string getInstance = "GetInstance", object[] getInstanceParameters = null, string getPresent = "GetPresent")
         {
             var helperType = GetHelperType(presentHelperTypeString, presentHelperDirTokens);
             var helperInstance = GetHelperInstance(helperType, getInstance, getInstanceParameters);

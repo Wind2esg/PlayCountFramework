@@ -209,7 +209,7 @@ namespace DefaultSeek
         //My Little Pony
         public static void IqiyiMyLittlePonySetup(string platform = "iqiyi", string series = "小马宝莉")
         {
-            Add(platform, new SeekItem(series, "全集（一到七）", "207260500"));
+            Add(platform, new SeekItem(series, "全集一到七", "207260500"));
             Add(platform, new SeekItem(series, "第一季", "254873000"));
             Add(platform, new SeekItem(series, "第二季", "254975300"));
             Add(platform, new SeekItem(series, "第三季", "255004500"));
@@ -220,13 +220,13 @@ namespace DefaultSeek
         }
         public static void TencentMyLittlePonySetup(string platform = "tencent", string series = "小马宝莉")
         {
-            Add(platform, new SeekItem(series, "全集（65）", "e26cdiurkbuwwj8"));
-            Add(platform, new SeekItem(series, "全集（一到七）", "3x7rf42yye8fpif"));
+            Add(platform, new SeekItem(series, "全集65", "e26cdiurkbuwwj8"));
+            Add(platform, new SeekItem(series, "全集一到七", "3x7rf42yye8fpif"));
             Add(platform, new SeekItem(series, "第七季", "8wzvvuy5l8cbg51"));
         }
         public static void YoukuMyLittlePonySetup(string platform = "youku", string series = "小马宝莉")
         {
-            Add(platform, new SeekItem(series, "全集（65）", "z421d7cf8e7a911de97c0"));
+            Add(platform, new SeekItem(series, "全集65", "z421d7cf8e7a911de97c0"));
             Add(platform, new SeekItem(series, "第一季", "z4d1387f6a0dd11e296da"));
             Add(platform, new SeekItem(series, "第二季", "z85d82fe6a0de11e2b2ac"));
             Add(platform, new SeekItem(series, "第三季", "z8c58160ea0e011e2b2ac"));
@@ -236,7 +236,7 @@ namespace DefaultSeek
         }
         public static void SohuMyLittlePonySetup(string platform = "sohu", string series = "小马宝莉")
         {
-            Add(platform, new SeekItem(series, "全集（一到七）", "s2014/xmbl/"));
+            Add(platform, new SeekItem(series, "全集一到七", "s2014/xmbl/"));
             Add(platform, new SeekItem(series, "全集英文版", "s2015/xbmlywb/"));
             Add(platform, new SeekItem(series, "第一季", "s2014/wdxmjyydmf1/"));
             Add(platform, new SeekItem(series, "第二季", "s2014/wdxmjyydmf2/"));
@@ -258,20 +258,21 @@ namespace DefaultSeek
         }
         public static void LetvMyLittlePonySetup(string platform = "letv", string series = "小马宝莉")
         {
-            Add(platform, new SeekItem(series, "全集（一到七）", "10002188"));
-            Add(platform, new SeekItem(series, "全集原声版", "10016446"));
+            Add(platform, new SeekItem(series, "全集一到七", "10002188"));
+            Add(platform, new SeekItem(series, "全集英文版", "10016446"));
             Add(platform, new SeekItem(series, "第四季", "10002907"));
             Add(platform, new SeekItem(series, "第五季", "10010779"));
-            Add(platform, new SeekItem(series, "第五季原声版", "10011401"));
+            Add(platform, new SeekItem(series, "第五季英文版", "10011401"));
         }
 
         //Hey Duggee
         public static void IqiyiHeyDuggeeSetup(string platform = "iqiyi", string series = "嗨 道奇")
         {
-            Add(platform, new SeekItem(series, "第一季", "684205500"));
-            Add(platform, new SeekItem(series, "第一季中文版", "651041400"));
-            Add(platform, new SeekItem(series, "第二季", "684205500"));
-            Add(platform, new SeekItem(series, "第二季中文版", "651825200"));
+            Add(platform, new SeekItem(series, "第一季", "651041400"));
+            Add(platform, new SeekItem(series, "第一季英文版", "684205500"));
+            Add(platform, new SeekItem(series, "第二季", "651825200"));
+            Add(platform, new SeekItem(series, "第二季英文版", "684205500"));
+            
         }
         public static void TencentHeyDuggeeSetup(string platform = "tencent", string series = "嗨道奇")
         {
@@ -286,10 +287,11 @@ namespace DefaultSeek
         //go jetters
         public static void IqiyiGoJettersSetup(string platform = "iqiyi", string series = "全球探险冲冲冲")
         {
+            Add(platform, new SeekItem(series, "第一季", "663283000"));
             Add(platform, new SeekItem(series, "第一季英文版", "665616600"));
-            Add(platform, new SeekItem(series, "第一季中文版", "663283000"));
+            Add(platform, new SeekItem(series, "第二季", "665869600"));
             Add(platform, new SeekItem(series, "第二季英文版", "665916600"));
-            Add(platform, new SeekItem(series, "第二季中文版", "665869600"));
+
         }
         public static void TencentGoJettersSetup(string platform = "tencent", string series = "全球探险冲冲冲")
         {

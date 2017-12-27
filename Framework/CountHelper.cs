@@ -74,7 +74,7 @@ namespace Framework
                     return countItem;
                 }
             }
-            countItem.Count = "没结果，点key查";
+            countItem.Count = "N/A";
             countItem.Key = targetUrl;
             return countItem;
         }
@@ -114,7 +114,7 @@ namespace Framework
         {
             if (seekItemList.Count() == 0)
             {
-                //Console.WriteLine("no seekItemList");
+                //there is no series on that platform.
                 return new List<ICountItem>();
             }
             return SeekCount(seekItemList);

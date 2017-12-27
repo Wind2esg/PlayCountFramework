@@ -45,8 +45,6 @@
     <Compile Include="DefaultCountHelper\PptvDefaultCountHelper.cs" />
     <Compile Include="DefaultCountHelper\SohuDefaultCountHelper.cs" />
     <Compile Include="DefaultCountHelper\TencentDefaultCountHelper.cs" />
-    <Compile Include="DefaultPresentHelper\HtmlDefaultPresentHelper.cs" />
-    <Compile Include="DefaultPresentHelper\TextDefaultPresentHelper.cs" />
     <Compile Include="DefaultCountHelper\YoukuDefaultCountHelper.cs" />
     <Compile Include="DefaultDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
