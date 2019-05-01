@@ -293,14 +293,19 @@ namespace DefaultSeek
             Add(platform, new SeekItem(series, "第二季英文版", "665916600"));
 
         }
-        public static void TencentGoJettersSetup(string platform = "tencent", string series = "全球探险冲冲冲")
-        {
-            Add(platform, new SeekItem(series, "全集", "4diuqk1bn78rhnu"));
-            Add(platform, new SeekItem(series, "第一季", "yy43go8ta4zuddk"));
-            Add(platform, new SeekItem(series, "第一季英文版", "tje5de09vigf44s"));
-            Add(platform, new SeekItem(series, "第二季", "zhgilo6k2tlcvk8"));
-            Add(platform, new SeekItem(series, "第二季英文版", "y9c0clf4nf68eo3"));
+        //public static void TencentGoJettersSetup(string platform = "tencent", string series = "全球探险冲冲冲")
+        //{
+        //    Add(platform, new SeekItem(series, "全集", "4diuqk1bn78rhnu"));
+        //    Add(platform, new SeekItem(series, "第一季", "yy43go8ta4zuddk"));
+        //    Add(platform, new SeekItem(series, "第一季英文版", "tje5de09vigf44s"));
+        //    Add(platform, new SeekItem(series, "第二季", "zhgilo6k2tlcvk8"));
+        //    Add(platform, new SeekItem(series, "第二季英文版", "y9c0clf4nf68eo3"));
+        //}
 
+        //Peter Rabbit
+        public static void TencentPeterRabbitSetup(string platform = "tencent", string series = "全球探险冲冲冲")
+        {
         }
+
     }
 }
